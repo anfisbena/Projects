@@ -1,0 +1,57 @@
+/* desktop 1 */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300&display=swap');
+:root{
+    background-color: rgb(241, 244, 252);
+    width: 1440px, 375px;
+    height: 900px;
+    background-image: url(./images/pattern-background-desktop.svg), url(./images/pattern-background-mobile.svgedg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-family: 'Red Hat Display', sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+div.main-box{
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    width: 400px;    
+    margin-top: 8%;
+  }
+p.title {
+font-size: 30px;
+font-weight: bold;
+}
+.main-text{
+    padding: 0px 50px 0px 50px;
+}
+.blue-button{
+    background-color: rgb(56, 42, 225);
+    color: white;
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    text-shadow: 2px;
+    margin: auto;
+    text-align: center;
+}
+.hero{
+    border-radius: 10px 10px 0px 0px;
+    width: 400px;
+}
+.bold{
+    font-weight: bold;
+}
+table, th, td{
+    width: 79%;
+    text-align: right;   
+    padding-bottom: 20px;
+    background: rgb(248,249,253) ;
+
+}
+a{
+    color: white;
+    text-decoration-color: rgb(56, 42, 225);
+}
+.attribution { font-size: 16px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%);text-decoration-color: white; }
