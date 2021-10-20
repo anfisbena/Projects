@@ -3,18 +3,20 @@
 :root{
     background-color: rgb(10,12,27);
     color:white;
-    width: 1440px,375px;
     font-size: 15px;
     font-family: 'Inter', sans-serif;
-    font-weight: 400,700;
 }
 
+body {
+    display:flex; 
+    justify-content: center;
+    align-items: center;
+}
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
 .cuadrito{
-    position:absolute;
-    top: 250px;
-    left: 200px;
+    width: 65%;
+    height: 45%;
     background-color: rgb(28,25,56);
     border-radius: 15px;
 }
@@ -23,7 +25,9 @@
 
 }
 img{
-    position: absolute;
     border-radius: 0px 15px 15px 0px ;
-    right: 50px;
+    float: right;
+}
+.__strong{
+    font-size: 35px;
 }
