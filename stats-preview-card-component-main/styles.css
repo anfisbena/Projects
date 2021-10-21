@@ -5,28 +5,39 @@
     color:white;
     font-size: 15px;
     font-family: 'Inter', sans-serif;
+    width: 1440px, 375px;
 }
 
 body {
     display:flex; 
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
-.cuadrito{
-    width: 65%;
-    height: 45%;
+
+.flex-container{
+    width: 60%;
+    height: 50%;
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    border-radius: 15px 0px 0px 15px;
     background-color: rgb(28,25,56);
-    border-radius: 15px;
+}
+.flex-wrap{
+
+    
+    flex-direction: column;
+    text-align: center;
 }
 .violeta{
     color:hsl(277, 64%, 61%);
-
 }
 img{
     border-radius: 0px 15px 15px 0px ;
-    float: right;
+    height: 100%;
 }
 .__strong{
     font-size: 35px;
