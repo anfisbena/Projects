@@ -1,36 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100&display=swap');
 :root{
     background-color: rgb(10,12,27);
     color:white;
     font-size: 15px;
     font-family: 'Inter', sans-serif;
     width: 1440px, 375px;
+    text-align: center;
 }
-
 body {
     display:flex; 
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
 
-.flex-container{
+.caja-grande{
     width: 60%;
-    height: 50%;
+    height: 40%;
     display:flex;
     justify-content: space-between;
     flex-direction: row-reverse;
     border-radius: 15px 0px 0px 15px;
     background-color: rgb(28,25,56);
 }
-.flex-wrap{
-
-    
+.caja-media{
+    display: flex;
     flex-direction: column;
-    text-align: center;
+    justify-content: space-around;
+}
+.caja-peque{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 .violeta{
     color:hsl(277, 64%, 61%);
@@ -38,7 +41,14 @@ body {
 img{
     border-radius: 0px 15px 15px 0px ;
     height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    background-color: blueviolet;
 }
-.__strong{
-    font-size: 35px;
+.texto-grande{
+    font-size: 24px;
+}
+.texto-chico{
+    font-size: 14px;
+    font-family: 'Lexend Deca';
 }
