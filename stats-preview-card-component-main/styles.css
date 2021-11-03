@@ -22,7 +22,7 @@ body {
     display:flex;
     justify-content: space-between;
     flex-direction: row-reverse;
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 15px 15px 15px 15px;
     background-color: rgb(28,25,56);
 }
 .caja-media{
