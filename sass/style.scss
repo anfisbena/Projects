@@ -1,5 +1,6 @@
 @use "colors";
 
+
 header{
   nav{
     background: colors.$purple;  
@@ -10,6 +11,10 @@ header{
   }
 }
 
+main{
+  background-color: rgba(120, 128, 218, 0.225);
+}
+
 .title{
   color: colors.$chocolate;
 }
@@ -17,10 +22,6 @@ header{
 .front_page{
   width: 100%;
   max-height: 400px;
-}
-
-#cacas{
-  border: 1px solid red;
 }
 
 h1{
@@ -41,4 +42,15 @@ p{
   max-height: 200px;
   border: 1px solid red;
   overflow: hidden;
+}
+
+.row1{
+  width: 50vh;
+  height: auto;
+}
+
+.margin10{
+  // border: 1px solid black;
+  margin-top:5vw;
+  margin-bottom: 5vw;
 }
