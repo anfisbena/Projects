@@ -13,6 +13,9 @@ header{
 
 main{
   background-color: rgba(120, 128, 218, 0.225);
+  .container{
+    padding: 1rem 0rem 0rem 0rem;
+  }
 }
 
 .title{
@@ -47,6 +50,7 @@ p{
 .row1{
   width: 50vh;
   height: auto;
+
 }
 
 .margin10{
