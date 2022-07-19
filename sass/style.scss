@@ -26,8 +26,12 @@ main{
   background-image: url(../assets/chocolate-belga-cut.jpg) ;
   background-size: cover;
   height: 300px;
+  border: 1px solid red;
   p{
-    color: white;
+    color: orange;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
   }
 }
 
