@@ -22,9 +22,13 @@ main{
   color: colors.$chocolate;
 }
 
-.front_page{
-  width: 100%;
-  max-height: 400px;
+.banner{
+  background-image: url(../assets/chocolate-belga-cut.jpg) ;
+  background-size: cover;
+  height: 300px;
+  p{
+    color: white;
+  }
 }
 
 h1{
@@ -40,7 +44,7 @@ p{
   justify-content: center;
   align-items: center;
   align-self: center;;
-  width: 900px;
+  max-width: 80%;
   height: auto;
   max-height: 200px;
   border: 1px solid red;
@@ -50,7 +54,7 @@ p{
 .row1{
   width: 50vh;
   height: auto;
-
+  border-radius: 50%;
 }
 
 .margin10{
