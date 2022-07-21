@@ -1,1 +1,15 @@
+@use "colors";
 @use "home";
+
+
+
+// For General Purposes
+header{
+  nav{
+    background: colors.$purple;  
+  }
+  .navbar-brand img{
+    width: 5vh;
+    height: auto;
+  }
+}
