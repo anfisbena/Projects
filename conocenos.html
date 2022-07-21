@@ -36,29 +36,33 @@
       </div>
     </nav>
   </header>
-  <main>
-    <div class="container">
+  <main class="container">
       <form>
         <h1>Cuentanos como te podemos ayudar</h1>
         <p>Ingresa tus datos, tu solicitud y nos pondremos pronto en contacto😄!  </p>
-        <fieldset>
-          <label>Nombre:<input name="nombre" type="text"></label>
-          <label>Teléfono:<input name="telefono" type="number"></label>
-          <label>Correo electrónico:<input name="email" type="email"></label>
-        </fieldset>
-        <fieldset>
-          <label><input type="radio" name="contacto" value="telefono" id=""> Nos comunicamos por llamada 📱</label>
-          <label><input type="radio" name="contacto" value="email" id=""> Nos comunicamos por correo Electrónico 📧</label>
-        </fieldset>
-        <fieldset>
-          <label>Dinos como podemos ayudarte<textarea></textarea></label>
-          <label><input type="checkbox" name="TyC" id=""> Acepto los Terminos y condiciones</label>
-        </fieldset>
-        <input type="submit" value="submit">
+        <div class="form-group">
+          <fieldset >
+            <label>Nombre:<input class="form-control" name="nombre" type="text" required/></label>
+            <label>Teléfono:<input class="form-control" name="telefono" type="number" required/></label>
+            <label>Correo electrónico:<input class="form-control" name="email" type="email" required/></label>
+          </fieldset>
+        </div>
+        <div class="form-group">
+          <fieldset>
+            <label><input type="radio" name="contacto" value="telefono" id=""> Nos comunicamos por llamada 📱</label>
+            <label><input type="radio" name="contacto" value="email" id=""> Nos comunicamos por correo Electrónico 📧</label>
+          </fieldset>
+        </div>
+        <div class="form-group">
+          <fieldset>
+            <label>Dinos como podemos ayudarte<textarea class="form-control"></textarea></label>
+            <label><input type="checkbox" name="TyC" id=""> Acepto los Terminos y condiciones</label>
+          </fieldset>
+          <input type="submit" value="submit">
+        </div>
       </form>
-    </div>
+    <img src="https://media.tenor.co/images/6c0523eaab587144a2c57a97ff5aeb5e/raw" alt="" srcset="" >
   </main>
-  <img src="https://media.tenor.co/images/6c0523eaab587144a2c57a97ff5aeb5e/raw" alt="" srcset="" >
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
