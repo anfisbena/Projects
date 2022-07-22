@@ -7,21 +7,23 @@
       padding: 1rem 0rem 0rem 0rem;
     }
   }
-  
   .title{
     color: colors.$chocolate;
   }
-  
   .banner{
     background-image: url(../assets/chocolate-belga-cut.jpg) ;
     background-size: cover;
     height: 300px;
     p{
-      color: rgb(151, 20, 151);
+      color: white;
       text-align: center;
       font-size: 25px;
       font-weight: 700;
-      text-shadow: 0px 0px 10px blue;
+      text-shadow: 0px 0px 4px purple;
+    }
+    a{
+      color:white;
+      text-decoration: none;
     }
   }
   
