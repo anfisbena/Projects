@@ -7,6 +7,7 @@ form{
 	margin: 9% auto;
   padding: 10px;
   background-color:aquamarine;
+  border-style: dashed;
 
   h1,p{
     text-align: center;
@@ -17,6 +18,17 @@ form{
   }
   
   input,textarea{
-    background-color:aquamarine;
+    margin-top:10px;
+    margin-bottom: 10px;
   }
+  input[type="submit"]{
+    display: block;
+    margin:0 auto;  
+    margin-top: 10px;
+    background-color: #c24fdc39;
+    border-radius: 20%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-weight: 400;
+    }
 }
