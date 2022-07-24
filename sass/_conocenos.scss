@@ -17,18 +17,23 @@ form{
     display: block;
   }
   
-  input,textarea{
-    margin-top:10px;
-    margin-bottom: 10px;
+  fieldset{
+    margin-bottom: 1.1rem;
+  
+    input,textarea{
+      margin-top:10px;
+      margin-bottom: 10px;
+    
+    }
   }
   input[type="submit"]{
     display: block;
-    margin:0 auto;  
+    margin:0 auto;
+    width: 25%;  
     margin-top: 10px;
-    background-color: #c24fdc39;
-    border-radius: 20%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 0% 5% 0% 5%;
     font-weight: 400;
-    }
+    font-size:1.3rem;
+    }  
+
 }
