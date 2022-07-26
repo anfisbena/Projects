@@ -42,17 +42,19 @@
         <br/><p>Ingresa tus datos, tu solicitud y nos pondremos pronto en contacto😄!</p><br/>
         <div class="row">
           <fieldset>
-            <input class="form-control" name="nombre" type="text" placeholder="Nombre"required/>
-            <input class="form-control" name="telefono" type="number" placeholder="Telefono" required/>
-            <input class="form-control" name="email" type="email" placeholder="Email" required/>
+            <input class="form-control" name="nombre" type="text" placeholder="Nombre completo"required/>
+            <input class="form-control" name="celular" type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Telefono contacto" required/>
+            <input class="form-control" name="email" type="email" placeholder="Correo electronico" required/>
           </fieldset>
         </div>
+<hr>
         <div class="row">
           <fieldset>
             <label><input type="radio" name="contacto" value="telefono" id=""> Nos comunicamos por llamada 📱</label>
             <label><input type="radio" name="contacto" value="email" id=""> Nos comunicamos por correo Electrónico 📧</label>
           </fieldset>
         </div>
+<hr>
         <div class="form-group">
           <fieldset>
             <label>Dinos como podemos ayudarte<textarea class="form-control" rows="5"cols="30"></textarea></label>
