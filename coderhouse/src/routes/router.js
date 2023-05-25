@@ -62,7 +62,9 @@ export default class CustomRouter {
   }
 
   generateCustomResponses(req, res, next) {
-    res.sendSucess = (payload) => res.send({ status: "sucess", payload });
+    res.sendSucess = (payload) => {
+      res.status(200).render(payload.view,{ title: "sucess", message:payload.result });
+    }
 
     res.sendServerError = (error) =>
       res.status(500).send({ status: "error", error });

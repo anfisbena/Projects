@@ -1,0 +1,11 @@
+<img src="https://media3.giphy.com/media/4N3Mqhl8JRyYLapZgt/source.gif" alt="" srcset="">
+<div>
+  <h1>Bienvenido {{user.first_name}}</h1>
+  {{#if user}}
+  <a href="/products"><button>PRODUCTS</button></a>
+  <a href="/profile"><button>PROFILE</button></a>
+  {{else}}
+  <a href="/login"><button>SIGN IN</button></a>
+  <a href="/register"><button>SIGN UP</button></a>
+  {{/if}}
+</div>
