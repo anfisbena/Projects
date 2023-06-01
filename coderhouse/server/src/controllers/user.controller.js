@@ -1,6 +1,8 @@
 import userService from "../services/user.service.js";
 import jwt from "jsonwebtoken";
 import {COOKIE,JWT_SECRET} from "../config/config.js";
+import UserDTO from "../dao/dto/user.dto.js";
+import passport from 'passport';
 
 class UserController{
   constructor(){}
@@ -34,8 +36,8 @@ class UserController{
 
   async login(req,res){
     try{
-      const  {email,password}=req.body
-      const user=await userService.validateUser(email,password)
+      const  credentials=new UserDTO(req.body)
+      const user=await userService.validateUser(credentials)
       if(user.status!==200){
         return res.send({status:user.status,error:user.error})
       }
@@ -54,7 +56,7 @@ class UserController{
         )
 
         return res
-        .cookie(COOKIE,jsonWebToken,{httpOnly:true})
+        .cookie(COOKIE,jsonWebToken,{httpOnly:true,maxAge:86400000})
         .send({status:200,message:'User logged in'})
       }
     }
@@ -63,25 +65,13 @@ class UserController{
   
   async register(req,res){//falta configurar el register
     try{
-      const userExist=await Users.findOne({email:user.email}).lean()
-      const error=ErrorCreateUser(user.first_name,user.last_name,user.email,userExist)
-      if(error){
-        return {status:error.status,result:error.result,error:error.error}}
-      else{
-        const newUser=
-        {
-          first_name:user.first_name,
-          last_name:user.last_name,
-          email:user.email,
-          password:hash(user.password),
-        };
-        const userCreated = await Users.create(newUser);
-        await createCart(userCreated._id)
-        return {status:201,result:'ok',payload:'user created'};      
-      }
+      const user=new UserDTO(req.body)
+      const result=await userService.addUser(user)
+      return res.send({status:result.status,payload:result.payload})
     }
     catch(error){
-      return {status:500,result:'error',payload:'error en servidor'}
+      console.log(error)
+      return null
     }
   }
 
@@ -107,6 +97,24 @@ class UserController{
       }
     }
     catch(err){console.log(err)}
+  }
+
+  async githubAuthenticate(req,res){
+    await passport.authenticate('githubAuth',{scope:['user:email']}),(req,res)=>{}
+  }
+
+  async githubSuccess(req,res){
+    passport.authenticate('githubAuth',{failureRedirect:'/login'}),async (req,res)=>{
+      delete req.user.password
+      req.session.user=req.user;
+      const jsonWebToken=jwt.sign(
+        req.session.user,
+        process.env.JWT_SECRET,
+        {expiresIn:'1d'}
+      )
+      res.cookie('coderUser',jsonWebToken,{maxAge:1000*60*60*24})
+      res.redirect('/');
+    }
   }
 }
 

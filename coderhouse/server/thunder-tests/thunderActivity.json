@@ -1,0 +1,337 @@
+[
+  {
+    "_id": "c72de676-0970-4abd-9da2-907e7061eb99",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://localhost:8080/",
+    "url": "https://localhost:8080/",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-01T02:39:10.837Z",
+    "modified": "2023-06-01T02:39:10.837Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "title",
+          "value": "test"
+        },
+        {
+          "name": "description",
+          "value": "testeando"
+        },
+        {
+          "name": "code",
+          "value": "420-69"
+        },
+        {
+          "name": "price",
+          "value": "69000"
+        },
+        {
+          "name": "status",
+          "value": "true"
+        },
+        {
+          "name": "stock",
+          "value": "999"
+        },
+        {
+          "name": "category",
+          "value": "Viatris"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "76c122c4-ace0-4cef-ac6e-d57f046225de",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://localhost:8080/products/",
+    "url": "https://localhost:8080/products/",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-01T02:39:50.410Z",
+    "modified": "2023-06-01T02:39:50.410Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "title",
+          "value": "test"
+        },
+        {
+          "name": "description",
+          "value": "testeando"
+        },
+        {
+          "name": "code",
+          "value": "420-69"
+        },
+        {
+          "name": "price",
+          "value": "69000"
+        },
+        {
+          "name": "status",
+          "value": "true"
+        },
+        {
+          "name": "stock",
+          "value": "999"
+        },
+        {
+          "name": "category",
+          "value": "Viatris"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "e1711040-959a-4a3d-bf84-c03b08be0b36",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://localhost:8080/products",
+    "url": "https://localhost:8080/products",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-01T02:39:52.673Z",
+    "modified": "2023-06-01T02:39:52.673Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "title",
+          "value": "test"
+        },
+        {
+          "name": "description",
+          "value": "testeando"
+        },
+        {
+          "name": "code",
+          "value": "420-69"
+        },
+        {
+          "name": "price",
+          "value": "69000"
+        },
+        {
+          "name": "status",
+          "value": "true"
+        },
+        {
+          "name": "stock",
+          "value": "999"
+        },
+        {
+          "name": "category",
+          "value": "Viatris"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "88647ac1-62fd-47e7-ad59-3433cc44c2d2",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8080/products/",
+    "url": "http://localhost:8080/products/",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-01T02:41:27.356Z",
+    "modified": "2023-06-01T03:06:26.276Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\":\"test\",\n  \"description\":\"testeando\",\n  \"code\":\"420-69\",\n  \"price\":69000,\n  \"status\":true,\n  \"stock\":999,\n  \"category\":\"Viatris\",\n  \"thumbnails\":[\"https://picsum.photos/200/300\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "fa4bbd86-ffc9-4d65-a4be-ef98d56db48e",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8080/products",
+    "url": "http://localhost:8080/products",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-01T02:41:37.444Z",
+    "modified": "2023-06-01T02:41:37.444Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "title",
+          "value": "test"
+        },
+        {
+          "name": "description",
+          "value": "testeando"
+        },
+        {
+          "name": "code",
+          "value": "420-69"
+        },
+        {
+          "name": "price",
+          "value": "69000"
+        },
+        {
+          "name": "status",
+          "value": "true"
+        },
+        {
+          "name": "stock",
+          "value": "999"
+        },
+        {
+          "name": "category",
+          "value": "Viatris"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "4ca5465d-c854-4527-bbb2-6304914aba60",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8080/products/643f4ce8fc13ae7ec4c91a97",
+    "url": "http://localhost:8080/products/643f4ce8fc13ae7ec4c91a97",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-06-01T03:01:25.459Z",
+    "modified": "2023-06-01T03:01:25.459Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "title",
+          "value": "test"
+        },
+        {
+          "name": "description",
+          "value": "testeando"
+        },
+        {
+          "name": "code",
+          "value": "420-69"
+        },
+        {
+          "name": "price",
+          "value": "69000"
+        },
+        {
+          "name": "status",
+          "value": "true"
+        },
+        {
+          "name": "stock",
+          "value": "999"
+        },
+        {
+          "name": "category",
+          "value": "Viatris"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "d54690dc-23a0-40f4-8a60-ca1739dafb27",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8080/products/64780accff64f3a33af66ad6",
+    "url": "http://localhost:8080/products/64780accff64f3a33af66ad6",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-06-01T03:32:50.234Z",
+    "modified": "2023-06-01T03:44:50.082Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\":\"test ACTUALIZADO\",\n  \"description\":\"testeando\",\n  \"code\":\"420-69\",\n  \"price\":69000,\n  \"status\":true,\n  \"stock\":999,\n  \"category\":\"Viatris\",\n  \"thumbnails\":[\"https://picsum.photos/200/300\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7556bbbc-1fce-4bb1-ab8f-3b17c0245459",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8080/products/64780accff64f3a33af66ad6",
+    "url": "http://localhost:8080/products/64780accff64f3a33af66ad6",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-06-01T03:58:18.521Z",
+    "modified": "2023-06-01T03:58:18.521Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\":\"test ACTUALIZADO\",\n  \"description\":\"testeando\",\n  \"code\":\"420-69\",\n  \"price\":69000,\n  \"status\":true,\n  \"stock\":999,\n  \"category\":\"Viatris\",\n  \"thumbnails\":[\"https://picsum.photos/200/300\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "bf04b77d-ba33-498f-b392-9decb94fbcf7",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8080/register",
+    "url": "http://localhost:8080/register",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-06-01T04:06:35.166Z",
+    "modified": "2023-06-01T04:06:35.166Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"first_name\":\"Ramon\",\n  \"last_name\":\"Romero\",\n  \"email\":\"carechimba@pepe.com\",\n  \"password\":42069\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "5b31d77b-b35b-4914-86a5-9b24d11a79ad",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8080/register",
+    "url": "http://localhost:8080/register",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-01T04:09:27.569Z",
+    "modified": "2023-06-01T04:30:16.943Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"first_name\":\"Ramon\",\n  \"last_name\":\"Romero\",\n  \"email\":\"carechimba@pepe.com\",\n  \"password\":\"42069\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

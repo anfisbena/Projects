@@ -8,9 +8,8 @@ import morgan from 'morgan';
 
 import { __dirname } from './utils.js';
 import initalizePassport from './auth/passport.js';
-import productRouter from './routes/product.routes.js'
-import userRouter from './routes/user.routes.js';
-import homeRouter from './routes/home.routes.js';
+import Routes from './routes/index.js';
+
 
 const app=express();
 
@@ -26,11 +25,4 @@ app.engine('handlebars',engine());
 app.set('views',`${__dirname}/views`)
 app.set('view engine','handlebars')
 app.use(morgan('dev'))
-
-app.use('/products',productRouter)
-app.use('/',userRouter)
-app.use('/',homeRouter)
-
-
-
-
+Routes(app);
