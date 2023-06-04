@@ -4,7 +4,7 @@ import { validatePassword } from "../utils.js";
 class UserService{
   constructor(){}
   
-  async validateUser(credentials){
+  async getUser(credentials){
     try{
       const user=await UserRepository.getUser(credentials)
       if(!user){

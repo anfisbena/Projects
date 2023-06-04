@@ -4,10 +4,10 @@ export let dao;
 
 switch (PERSISTANCE) {
   case "MONGO":
-    const {mongo}=await import ('./mongodb/mongoDB.js')
-    dao=mongo;
+    const mongo=await import  ('./mongodb/index.js')
+    dao=mongo
     break;
 
   }
 
-  export default {dao};
+  export default dao;

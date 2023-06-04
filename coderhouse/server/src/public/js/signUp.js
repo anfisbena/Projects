@@ -19,7 +19,7 @@ if(registerForm){
     .then(res=>res.json())
     .then(data=>{
       console.log(data.status)
-      if(data.status===200){
+      if(data.status===201){
         window.location.href='/login'
       }
       else{

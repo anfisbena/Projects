@@ -1,0 +1,29 @@
+<div>
+  <a href="/"><button>HOME</button></a>
+  {{#if user}}
+    <a href="/profile"><button>PROFILE</button></a>
+  {{/if}}
+  {{#if products.length}}
+    {{#each products}}
+      <div>
+        <h2>{{this.title}}</h2>
+        <p class="code">NKU:{{this.code}}</p>
+        <p>{{this.description}}</p>
+        <h2>${{this.price}}</h2>
+      </div>
+      <div>
+        <form>
+            <label for="qty">Qty:</label>
+            <p>{{this.qty}}</p>
+            <input type="submit" value="Delete" id="delete">
+        </form>
+        <h3>Quantity</h3>
+      </div>
+    {{/each}}
+  {{else}}
+    <h2>Cart Empty</h2>
+  {{/if}} 
+</div>
+
+{{!-- <script src="/socket.io/socket.io.js"></script> --}}
+{{!-- <script src="/js/addToCart.js"></script> --}}

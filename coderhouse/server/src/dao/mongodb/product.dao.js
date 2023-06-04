@@ -1,45 +1,10 @@
 import mongoose from 'mongoose';
 import {mongoDB} from '../../config/config.js';
-import UserModel from './models/user.model.js';
 import ProductModel from './models/product.model.js';
-import CartSchema from './models/carts.model.js';
-import {hash} from '../../utils.js'
 
-
-class mongoConnection {
+export default class Product {
   constructor(){
     mongoose.connect(mongoDB)
-  }
-
-  getUser(email){
-    return UserModel.findOne({email:email});
-  }
-
-  async addUser(user){
-    try{
-      const userExist=await UserModel.findOne({email:user.email}).lean()
-      console.log(userExist,"User exist")
-      if(userExist){
-      return {status:400,result:'error',payload:'user already exists'}
-      }
-      else{
-        const newUser=
-        {
-          first_name:user.first_name,
-          last_name:user.last_name,
-          email:user.email,
-          password:hash(user.password),
-          role:user.role,
-        };
-        const userCreated=await UserModel.create(newUser)
-        await this.createCart(userCreated._id)
-        return {status:201,result:'ok',payload:'user created'}
-      }
-    }
-    catch(error){
-      console.log(error)
-      return {status:500,result:'error',payload:'internal error'}
-    }
   }
 
   getProducts(query,options){
@@ -113,19 +78,4 @@ class mongoConnection {
       return {status:400,result:'error',payload:'producto no encontrado'}
     } 
   }
-
-  async createCart(userId){
-    try{
-      const result=await CartSchema.create({uid:userId});
-      return {status:200,result:'ok',payload:result}
-    }
-    catch(error){
-      console.log(error);
-    }
-  }
 }
-
-
-export const mongo=new mongoConnection();
-
-export default mongo

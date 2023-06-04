@@ -1,8 +1,8 @@
-import {dao} from '../dao/dbSelector.js'
+import dao from '../dao/dbSelector.js'
 
 class ProductRepository{
   constructor(dao){
-    this.dao=dao;
+    this.dao=dao.product;
   }
   
   async getProducts(query,options){

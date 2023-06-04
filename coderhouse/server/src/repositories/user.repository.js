@@ -1,8 +1,8 @@
-import {dao} from '../dao/dbSelector.js'
+import dao from '../dao/dbSelector.js'
 
 class UserRepository{
   constructor(dao){
-    this.dao=dao;
+    this.dao=dao.user;
   }
   async getUser(credentials){
     const user=await this.dao.getUser(credentials.email);

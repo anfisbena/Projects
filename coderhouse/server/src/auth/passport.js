@@ -1,9 +1,8 @@
 import passport from "passport";
 import github from "passport-github2";
 import jwt from 'passport-jwt'; //afterclass 11/05
-import {JWT_SECRET} from '../config/config.js';
+import {JWT_SECRET,GITHUB_CID,GITHUB_SECRET,GITHUB_URL} from '../config/config.js';
 import {cookieExtractor} from './passportTools.js'
-import {GITHUB_CID,GITHUB_SECRET,GITHUB_URL} from "../config/config.js";
 import User from "../dao/mongodb/models/user.model.js";
 
 const jwtStrategy=jwt.Strategy;

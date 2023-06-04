@@ -7,7 +7,7 @@ import passport from 'passport';
 class UserController{
   constructor(){}
   
-  async loginScreen(req,res){
+  async getLogin(req,res){
     try{
       if(!req.cookies.coderCookie){
         return res.render('login',{
@@ -20,34 +20,20 @@ class UserController{
     }
     catch(err){console.log(err)}
   }
-
-  async registerScreen(req, res){
-    try{
-      if(!req.cookies.coderCookie){
-        return res.render('register',{
-          title:'Register',
-        })}
-      else{
-        return res.redirect('/profile')
-      }
-    }
-    catch(err){console.log(err)}
-  }
-
-  async login(req,res){
+  async setLogin(req,res){
     try{
       const  credentials=new UserDTO(req.body)
-      const user=await userService.validateUser(credentials)
+      const user=await userService.getUser(credentials)
       if(user.status!==200){
         return res.send({status:user.status,error:user.error})
       }
-
       else{
         const userData={
           first_name:user.payload.first_name,
           last_name:user.payload.last_name,
           email:user.payload.email,
-          role:user.payload.role
+          role:user.payload.role,
+          cart:user.payload.cart
         }
         const jsonWebToken=jwt.sign(
           userData,
@@ -63,7 +49,20 @@ class UserController{
     catch(err){console.log(err)}
   }
   
-  async register(req,res){//falta configurar el register
+
+  async getRegister(req, res){
+    try{
+      if(!req.cookies.coderCookie){
+        return res.render('register',{
+          title:'Register',
+        })}
+      else{
+        return res.redirect('/profile')
+      }
+    }
+    catch(err){console.log(err)}
+  }
+  async setRegister(req,res){
     try{
       const user=new UserDTO(req.body)
       const result=await userService.addUser(user)
@@ -75,7 +74,7 @@ class UserController{
     }
   }
 
-  logout (req, res){
+  getLogout (req, res){
     try{
       res.clearCookie(process.env.COOKIE)
       return res.redirect('/login')
@@ -83,7 +82,7 @@ class UserController{
     catch(err){console.log(err)}
   }
 
-  async profile(req,res){
+  async getProfile(req,res){
     try{
       if(!req.cookies.coderCookie){
         return res.redirect('/login')
@@ -99,11 +98,11 @@ class UserController{
     catch(err){console.log(err)}
   }
 
-  async githubAuthenticate(req,res){
+  async githubAuthenticate(){
     await passport.authenticate('githubAuth',{scope:['user:email']}),(req,res)=>{}
   }
 
-  async githubSuccess(req,res){
+  async githubSuccess(){
     passport.authenticate('githubAuth',{failureRedirect:'/login'}),async (req,res)=>{
       delete req.user.password
       req.session.user=req.user;
@@ -112,8 +111,9 @@ class UserController{
         process.env.JWT_SECRET,
         {expiresIn:'1d'}
       )
-      res.cookie('coderUser',jsonWebToken,{maxAge:1000*60*60*24})
-      res.redirect('/');
+      return res
+      .cookie(COOKIE,jsonWebToken,{httpOnly:true,maxAge:86400000})
+      .redirect('/')
     }
   }
 }

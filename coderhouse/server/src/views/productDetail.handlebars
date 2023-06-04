@@ -1,0 +1,41 @@
+<div>
+  <a href="/"><button>HOME</button></a>
+  {{#if user}}
+    <a href="/profile"><button>PROFILE</button></a>
+  {{else}}
+    <a href="/login"><button>LOGIN</button></a>
+  {{/if}}
+    <div>
+      {{#each thumbnails}}
+        <img src="{{this}}" alt="productItem">
+      {{/each}}
+      <h2>{{this.title}}</h2>
+      <p class="code" pid={{this._id}}>NKU:{{this.code}}</p>
+      <p>{{this.description}}</p>
+      <h2>${{this.price}}</h2>
+    </div>
+    <div>
+      <form>
+          <label for="qty">Qty:</label>
+          <input type="number" name="qty" min="1" max="5" value="1" class="qty">
+          <input type="button" value="Add to cart" class="addCartItem">
+      </form>
+      <h3>Quantity</h3>
+    </div>
+  {{/each}}
+    <div>
+      <h2>Page {{currentPage}} of {{totalPages}}</h2>
+      {{#if hasPrevPage}}
+        <a href={{hasPrevPage}}><button>Previous</button></a>
+      {{/if}}
+      {{#if hasNextPage}}
+        <a href={{hasNextPage}}><button>Next</button></a>
+      {{/if}}
+    </div>
+  {{else}}
+    <h2>Product not found</h2>
+  {{/if}} 
+</div>
+
+{{!-- <script src="/socket.io/socket.io.js"></script> --}}
+<script src="/js/addToCart.js"></script>
