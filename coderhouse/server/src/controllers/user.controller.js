@@ -1,11 +1,13 @@
-import userService from "../services/user.service.js";
 import jwt from "jsonwebtoken";
 import {COOKIE,JWT_SECRET} from "../config/config.js";
 import UserDTO from "../dao/dto/user.dto.js";
 import passport from 'passport';
+import {UserService} from "../services/index.js"
 
-class UserController{
-  constructor(){}
+export default class UserController{
+  constructor(service){
+    this.service=service
+  }
   
   async getLogin(req,res){
     try{
@@ -23,7 +25,8 @@ class UserController{
   async setLogin(req,res){
     try{
       const  credentials=new UserDTO(req.body)
-      const user=await userService.getUser(credentials)
+      // const user=await this.service.getUser(credentials)
+      const user=await UserService.getUser(credentials)
       if(user.status!==200){
         return res.send({status:user.status,error:user.error})
       }
@@ -65,7 +68,8 @@ class UserController{
   async setRegister(req,res){
     try{
       const user=new UserDTO(req.body)
-      const result=await userService.addUser(user)
+      // const result=await this.service.addUser(user)
+      const result=await UserService.addUser(user)
       return res.send({status:result.status,payload:result.payload})
     }
     catch(error){
@@ -117,6 +121,3 @@ class UserController{
     }
   }
 }
-
-const userController=new UserController();
-export default userController;

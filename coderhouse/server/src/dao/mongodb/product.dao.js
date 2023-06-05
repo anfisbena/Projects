@@ -1,19 +1,16 @@
-import mongoose from 'mongoose';
-import {mongoDB} from '../../config/config.js';
-import ProductModel from './models/product.model.js';
-
 export default class Product {
-  constructor(){
-    mongoose.connect(mongoDB)
+  constructor(mongooseConection,Product){
+    mongooseConection
+    this.product=Product
   }
 
   getProducts(query,options){
-    return ProductModel.paginate(query,options);
+    return this.product.paginate(query,options);
   }
 
   async getProductById(id){
     try{
-      const result =await ProductModel.findById(id).lean()
+      const result =await this.product.findById(id).lean()
       console.log([result])
       return [result]
     }
@@ -26,7 +23,7 @@ export default class Product {
   addProduct(title,description,code,price,status,stock,category){
     try{
       console.log(title,description,code,price,status,stock,category)
-      ProductModel.create(
+      this.product.create(
         {
           title:title,
           description:description,
@@ -60,7 +57,7 @@ export default class Product {
           category:category??oldProduct[0].category,
           thumbnails:oldProduct[0].thumbnails
         }
-        const caca=await ProductModel.findByIdAndUpdate(query,updatedProduct)
+        const caca=await this.product.findByIdAndUpdate(query,updatedProduct)
         console.log(caca)
         return {status:200,result:'ok',payload:'producto actualizado'}  
       }
@@ -71,7 +68,7 @@ export default class Product {
   
   async deleteProduct(id){
     try{
-      await ProductModel.deleteOne({_id:id})
+      await this.product.deleteOne({_id:id})
       return {status:200,result:'ok',payload:'producto eliminado'}
     }
     catch(error){

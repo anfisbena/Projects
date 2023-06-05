@@ -1,20 +1,26 @@
-import mongoose from 'mongoose';
-import {mongoDB} from '../../config/config.js';
-import UserModel from './models/user.model.js';
 import {hash} from '../../utils.js'
 
+
 export default class User {
-  constructor(){
-    mongoose.connect(mongoDB)
+  constructor(mongooseConection,UserModel,CartDAO){
+    mongooseConection
+    this.user=UserModel
+    this.cart=CartDAO
   }
 
-  getUser(email){
-    return UserModel.findOne({email:email});
+  async getUser(email){
+    try{
+      return await this.user.findOne({email:email});
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
   }
 
   async addUser(user){
     try{
-      const userExist=await UserModel.findOne({email:user.email}).lean()
+      const userExist=await this.user.findOne({email:user.email}).lean()
       if(userExist){
       return {status:400,result:'error',payload:'user already exists'}
       }
@@ -27,9 +33,9 @@ export default class User {
           password:hash(user.password),
           role:user.role,
         };
-        const userCreated=await UserModel.create(newUser)
-        const cartCreated=await this.createCart(userCreated._id)
-        await UserModel.findByIdAndUpdate(userCreated._id,{cart:cartCreated.payload._id})
+        const userCreated=await this.user.create(newUser)
+        const cartCreated=await this.cart.createCart(userCreated._id)
+        await this.user.findByIdAndUpdate(userCreated._id,{cart:cartCreated.payload._id})
         
         return {status:201,result:'ok',payload:'user created'}
       }

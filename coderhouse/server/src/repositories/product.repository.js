@@ -1,8 +1,6 @@
-import dao from '../dao/dbSelector.js'
-
-class ProductRepository{
+export default class ProductRepository{
   constructor(dao){
-    this.dao=dao.product;
+    this.dao=dao.ProductDAO;
   }
   
   async getProducts(query,options){
@@ -44,6 +42,3 @@ class ProductRepository{
     }
   }
 }
-
-const productRepo=new ProductRepository(dao);
-export default productRepo;

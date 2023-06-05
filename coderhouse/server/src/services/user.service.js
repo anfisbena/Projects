@@ -1,16 +1,16 @@
-import UserRepository from "../repositories/user.repository.js";
-import { validatePassword } from "../utils.js";
-
-class UserService{
-  constructor(){}
+export default class UserService{
+  constructor(repository,passwordValidator){
+    this.repository=repository
+    this.passwordValidator=passwordValidator
+  }
   
   async getUser(credentials){
     try{
-      const user=await UserRepository.getUser(credentials)
+      const user=await this.repository.getUser(credentials)
       if(!user){
         return {status:401,error:'User not found'}
       }
-      if(!validatePassword(user,credentials)){
+      if(!this.passwordValidator(user,credentials)){
         return {status:401,error:'Incorrect password'}
       }
       else{
@@ -22,7 +22,7 @@ class UserService{
 
   async addUser(user){
     try{
-      const result=await UserRepository.addUser(user)
+      const result=await this.repository.addUser(user)
       return result
     }
     catch(err){
@@ -32,6 +32,3 @@ class UserService{
   }
 
 }
-
-const userService=new UserService();
-export default userService;

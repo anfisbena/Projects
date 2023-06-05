@@ -1,12 +1,16 @@
-import dao from '../dao/dbSelector.js'
-
-class UserRepository{
+export default class UserRepository{
   constructor(dao){
-    this.dao=dao.user;
+    this.dao=dao.UserDAO;
   }
   async getUser(credentials){
-    const user=await this.dao.getUser(credentials.email);
-    return user;
+    try{
+      const user=await this.dao.getUser(credentials.email);
+      return user;
+    }
+    catch(err){
+      console.log(err);
+      return null;
+    }
   }
   async addUser(user){
     try{
@@ -18,7 +22,4 @@ class UserRepository{
       return null
     }
   }
-}
-
-const userRepo=new UserRepository(dao);
-export default userRepo;  
+};  

@@ -1,11 +1,11 @@
-import OrderRepository from "../repositories/order.repository.js";
-
-class OrderService{
-  constructor(){}
+export default class OrderService{
+  constructor(repository){
+    this.repository=repository
+  }
   
   async getCart(cid){
     try{
-      const result=await OrderRepository.getCart(cid)
+      const result=await this.repository.getCart(cid)
       return result
     }
     catch(error){
@@ -14,9 +14,9 @@ class OrderService{
     }
   }
 
-  async addOrder(title,description,code,price,status,stock,category){
+  async addOrder(cid,pid,qty){
     try{
-      const result=await OrderRepository.addOrder(title,description,code,price,status,stock,category)
+      const result=await this.repository.addOrder(cid,pid,qty)
       return result
     }
     catch(error){
@@ -27,7 +27,7 @@ class OrderService{
 
   async updateOrder(id,title,description,code,price,status,stock,category){
     try{
-      const result=await OrderRepository.updateOrder(id,title,description,code,price,status,stock,category)
+      const result=await this.repository.updateOrder(id,title,description,code,price,status,stock,category)
       return result
     }
     catch(error){
@@ -38,7 +38,7 @@ class OrderService{
 
   async deleteOrder(id){
     try{
-      const result=await OrderRepository.deleteOrder(id)
+      const result=await this.repository.deleteOrder(id)
       return result
     }
     catch(error){
@@ -47,6 +47,3 @@ class OrderService{
     }
   }
 }
-
-const orderService=new OrderService();
-export default orderService;

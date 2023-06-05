@@ -1,18 +1,20 @@
 import { Router } from "express";
-import userController from "../controllers/user.controller.js";
+import {UserController} from "../controllers/index.js";
+
+
 
 const router = Router();
 
-router.get('/login', userController.getLogin);
-router.get('/logout',userController.getLogout)
-router.get('/profile',userController.getProfile)
-router.get('/register',userController.getRegister);
+router.get('/login', UserController.getLogin);
+router.get('/logout',UserController.getLogout)
+router.get('/profile',UserController.getProfile)
+router.get('/register',UserController.getRegister);
 
-router.post('/login',userController.setLogin)
-router.post('/register',userController.setRegister)
+router.post('/login',UserController.setLogin)
+router.post('/register',UserController.setRegister)
 
-router.get('/auth/github',userController.githubAuthenticate);
+router.get('/auth/github',UserController.githubAuthenticate);
 
-router.get('/auth/github/success',userController.githubSuccess)
+router.get('/auth/github/success',UserController.githubSuccess)
 
 export default router;

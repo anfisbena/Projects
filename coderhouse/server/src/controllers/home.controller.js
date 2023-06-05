@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../config/config.js";
 
-class HomeController{
+export default class HomeController{
   constructor(){}
   
   async homeScreen(req,res){
@@ -19,6 +19,3 @@ class HomeController{
     catch(err){console.log(err)}
   }
 }
-
-const homeController=new HomeController();
-export default homeController;

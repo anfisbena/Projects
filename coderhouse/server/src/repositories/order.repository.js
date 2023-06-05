@@ -1,8 +1,6 @@
-import dao from '../dao/dbSelector.js'
-
-class OrderRepository{
+export default class OrderRepository{
   constructor(dao){
-    this.dao=dao.cart;
+    this.dao=dao.CartDAO;
   }
   
   async getCart(cid){
@@ -16,10 +14,9 @@ class OrderRepository{
     }
   }
 
-  async addOrder(cid,pid,qty){
+  async addOrder(cid,pid,qty){//no testeado
     try{
-      console.log(cid,pid,qty,"REPOSITORY")
-      const Order=await this.dao.addOrder(title,description,code,price,status,stock,category);
+      const Order=await this.dao.addOrder(cid,pid,qty);
       return Order
     }
     catch(error){
@@ -28,7 +25,7 @@ class OrderRepository{
     }
   }
 
-  async updateOrder(id,title,description,code,price,status,stock,category){
+  async updateOrder(id,title,description,code,price,status,stock,category){//no testeado
     try{
       const Order=await this.dao.updateOrder(id,title,description,code,price,status,stock,category);
       return Order
@@ -39,7 +36,7 @@ class OrderRepository{
     }
   }
 
-  async deleteOrder(id){
+  async deleteOrder(id){//no testeado
     try{
       const Order=await this.dao.deleteOrder(id);
       return Order
@@ -50,6 +47,3 @@ class OrderRepository{
     }
   }
 }
-
-const OrderRepo=new OrderRepository(dao);
-export default OrderRepo;

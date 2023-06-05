@@ -1,16 +1,16 @@
-import ProductRepository from "../repositories/product.repository.js";
-
-class ProductService{
-  constructor(){}
+export default class ProductService{
+  constructor(repository){
+    this.repository=repository
+  }
   
   async getProducts(query,options){
-    const result=await ProductRepository.getProducts(query,options)
+    const result=await this.repository.getProducts(query,options)
     return result
   }
 
   async addProduct(title,description,code,price,status,stock,category){
     try{
-      const result=await ProductRepository.addProduct(title,description,code,price,status,stock,category)
+      const result=await this.repository.addProduct(title,description,code,price,status,stock,category)
       return result
     }
     catch(error){
@@ -21,7 +21,7 @@ class ProductService{
 
   async updateProduct(id,title,description,code,price,status,stock,category){
     try{
-      const result=await ProductRepository.updateProduct(id,title,description,code,price,status,stock,category)
+      const result=await this.repository.updateProduct(id,title,description,code,price,status,stock,category)
       return result
     }
     catch(error){
@@ -32,7 +32,7 @@ class ProductService{
 
   async deleteProduct(id){
     try{
-      const result=await ProductRepository.deleteProduct(id)
+      const result=await this.repository.deleteProduct(id)
       return result
     }
     catch(error){
@@ -41,6 +41,3 @@ class ProductService{
     }
   }
 }
-
-const productService=new ProductService();
-export default productService;
