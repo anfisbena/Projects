@@ -5,20 +5,24 @@
   {{/if}}
   {{#if cart}}
     {{#each cart}}
-      <div>
-        <h2>{{this.pid.title}}</h2>
-        <p class="code">NKU:{{this.pid.code}}</p>
-        <p>{{this.pid.description}}</p>
-        <h2>${{this.pid.price}}</h2>
-      </div>
-      <div>
-        <form>
-            <label for="qty">Qty: {{this.quantity}}</label>
-            <br>
-            <input type="submit" value="Delete" id="delete" class="deleteCartItem" pid={{this.pid._id}}>
-        </form>
-        <h3>Quantity</h3>
-      </div>
+    <table class="cartInfo">
+      <tr>
+        <th>Product</th>
+        <th>Unit Price</th>
+        <th>Qty</th>
+        <th>Subtotal</th>
+        <th>Actions</th>
+      </tr>
+      <tr>
+        <td>{{this.pid.title}}</td>
+        <td class="price" value={{this.pid.price}}>$ {{this.pid.price}}</td>
+        <td class="quantity" value={{this.quantity}}>{{this.quantity}}</td>
+        <td class="subtotal"></td>
+        <td>
+          <button class="deleteCartItem" pid={{this.pid._id}}>delete</button>
+        </td>
+    </table>
+      <button class="updateCartItem" pid={{this.pid._id}}>Checkout!</button>
     {{/each}}
   {{else}}
     <h2>Cart Empty</h2>
@@ -26,4 +30,4 @@
 </div>
 
 {{!-- <script src="/socket.io/socket.io.js"></script> --}}
-<script src="/js/deleteFromCart.js"></script>
+<script src="/js/cartManager.js"></script>

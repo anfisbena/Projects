@@ -12,3 +12,10 @@ addCartButtons.forEach(button => {
     .then(x=>window.location.href='/cart')
   }
 });
+
+const table=document.querySelectorAll('.cartInfo');
+table.forEach(tableValues=>{
+  const price=tableValues.querySelector('.price').getAttribute('value')
+  const quantity=tableValues.querySelector('.quantity').getAttribute('value')
+  tableValues.querySelector('.subtotal').innerText=price*quantity;
+})
