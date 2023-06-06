@@ -1,4 +1,4 @@
-import cartRepository from './order.repository.js';
+import cartRepository from './cart.repository.js';
 import productRepository from './product.repository.js';
 import userRepository from './user.repository.js';
 import dao from '../dao/dbSelector.js'

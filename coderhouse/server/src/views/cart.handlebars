@@ -3,19 +3,19 @@
   {{#if user}}
     <a href="/profile"><button>PROFILE</button></a>
   {{/if}}
-  {{#if products.length}}
-    {{#each products}}
+  {{#if cart}}
+    {{#each cart}}
       <div>
-        <h2>{{this.title}}</h2>
-        <p class="code">NKU:{{this.code}}</p>
-        <p>{{this.description}}</p>
-        <h2>${{this.price}}</h2>
+        <h2>{{this.pid.title}}</h2>
+        <p class="code">NKU:{{this.pid.code}}</p>
+        <p>{{this.pid.description}}</p>
+        <h2>${{this.pid.price}}</h2>
       </div>
       <div>
         <form>
-            <label for="qty">Qty:</label>
-            <p>{{this.qty}}</p>
-            <input type="submit" value="Delete" id="delete">
+            <label for="qty">Qty: {{this.quantity}}</label>
+            <br>
+            <input type="submit" value="Delete" id="delete" class="deleteCartItem" pid={{this.pid._id}}>
         </form>
         <h3>Quantity</h3>
       </div>
@@ -26,4 +26,4 @@
 </div>
 
 {{!-- <script src="/socket.io/socket.io.js"></script> --}}
-{{!-- <script src="/js/addToCart.js"></script> --}}
+<script src="/js/deleteFromCart.js"></script>

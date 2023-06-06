@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../config/config.js";
-import {OrderService} from "../services/index.js"
+import {CartService} from "../services/index.js"
 
-export default class OrderController{
+export default class CartController{
   constructor(service){
     this.service=service
   }
@@ -15,7 +15,7 @@ export default class OrderController{
       else{
         const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
         // const result=await this.service.getCart(cid)
-        const result=await OrderService.getCart(cid)
+        const result=await CartService.getCart(cid)
         return res.render('cart',{
           title:'cart',
           cart:result.payload.products
@@ -39,7 +39,7 @@ export default class OrderController{
           sort:req.query.sort?{price:req.query.sort}:{}
         };
         // const data=await this.service.getOrders(query,options);
-        const data=await OrderService.getOrders(query,options);
+        const data=await CartService.getOrders(query,options);
         const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
         return res.render('cart', {
           title: 'cart',
@@ -64,7 +64,7 @@ export default class OrderController{
       const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
       const {pid,qty}=req.body
       // // const response=await this.service.addProduct(cid,pid,qty)
-      const response=await OrderService.addOrder(cid,pid,qty)
+      const response=await CartService.addOrder(cid,pid,qty)
       return res.send({status:response.status,payload:response.payload})
     }
     catch(error){
@@ -77,15 +77,17 @@ export default class OrderController{
       const id = req.params.pid;
       const {title,description,code,price,status,stock,category}=req.body
       // const response=await this.service.updateProduct(id,title,description,code,price,status,stock,category)
-      const response=await OrderService.updateProduct(id,title,description,code,price,status,stock,category)
+      const response=await CartService.updateProduct(id,title,description,code,price,status,stock,category)
       return res.send({status:response.status,payload:response.payload})
     }
   
   async deleteOrder(req,res){
       try{
-        // const response=await this.service.deleteProduct(req.params.pid)
-        const response=await OrderService.deleteProduct(req.params.pid)
-        return {status:response.status,result:response.result,payload:response.payload}
+        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
+        const pid=req.params.oid
+        // const response=await this.service.deleteOrder(cid,pid)
+        const response=await CartService.deleteOrder(cid,pid)
+        return {status:response.status}
       }
       catch(error){
         console.log(error)

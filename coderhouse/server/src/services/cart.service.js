@@ -1,4 +1,4 @@
-export default class OrderService{
+export default class CartService{
   constructor(repository){
     this.repository=repository
   }
@@ -36,9 +36,9 @@ export default class OrderService{
     }
   }
 
-  async deleteOrder(id){
+  async deleteOrder(cid,pid){
     try{
-      const result=await this.repository.deleteOrder(id)
+      const result=await this.repository.deleteOrder(cid,pid)
       return result
     }
     catch(error){

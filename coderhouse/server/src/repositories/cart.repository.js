@@ -1,4 +1,4 @@
-export default class OrderRepository{
+export default class CartRepository{
   constructor(dao){
     this.dao=dao.CartDAO;
   }
@@ -36,9 +36,9 @@ export default class OrderRepository{
     }
   }
 
-  async deleteOrder(id){//no testeado
+  async deleteOrder(cid,pid){//no testeado
     try{
-      const Order=await this.dao.deleteOrder(id);
+      const Order=await this.dao.deleteOrder(cid,pid);
       return Order
     }
     catch(error){
