@@ -3,6 +3,7 @@ import {COOKIE,JWT_SECRET} from "../config/config.js";
 import UserDTO from "../dao/dto/user.dto.js";
 import passport from 'passport';
 import {UserService} from "../services/index.js"
+import nodemailer from 'nodemailer';
 
 export default class UserController{
   constructor(service){
@@ -70,6 +71,27 @@ export default class UserController{
       const user=new UserDTO(req.body)
       // const result=await this.service.addUser(user)
       const result=await UserService.addUser(user)
+      const transport=nodemailer.createTransport({
+        service:'gmail',
+        port:587,
+        auth:{
+          user:'arcilacarmona@gmail.com',
+          pass:'byvghbkxkbxwsudk'
+        }
+      })
+
+      transport.sendMail({
+        from:'no-response <no-response@e-commerce.com>',
+        to:`<${user.email}>`,
+        subject:'Bienvenido a E-commerce',
+        html:`
+        <div>
+          <h1>Te acabas de unir a la tienda mas chimba!</h1>
+          <p>Medellin style y mucho mas</p>
+        </div>
+        `,
+        attachments:[]
+      })
       return res.send({status:result.status,payload:result.payload})
     }
     catch(error){
