@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../config/config.js";
-import {CartService} from "../services/index.js"
+import {CartService,ProductService} from "../services/index.js"
 
 export default class CartController{
   constructor(service){
@@ -15,10 +15,50 @@ export default class CartController{
       else{
         const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
         // const result=await this.service.getCart(cid)
-        const result=await CartService.getCart(cid)
+        const list=await CartService.getCart(cid)
+        const result=await Promise.all(
+          list.payload.products.map(async(item)=>{
+          let qtyRequested=item.quantity
+          let stock=item.pid.stock
+          let newItem={...item,
+          status:stock<qtyRequested?'No Stock':'In Stock'
+          }
+          return newItem
+        }))
+        return res.render('cart', {
+          title: 'cart',
+          cart: result
+        });
+      }
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
+
+
+  async getOrders(req,res){
+    try{
+      if(!req.cookies.coderCookie){
+        return res.redirect('/login')
+      }
+      else{
+        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
+        // const result=await this.service.getCart(cid)
+        const list=await CartService.getCart(cid)
+        const result=await Promise.all(
+          list.payload.products.map(async(item)=>{
+          let qtyRequested=item.quantity
+          let stock=item.pid.stock
+          let newItem={...item,
+          status:stock<qtyRequested?'No Stock':'In Stock'
+          }
+          return newItem
+        }))
         return res.render('cart',{
           title:'cart',
-          cart:result.payload.products
+          cart:result
         })
       }
     }
@@ -85,6 +125,7 @@ export default class CartController{
       try{
         const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
         const pid=req.params.oid
+        console.log(req.body)
         // const response=await this.service.deleteOrder(cid,pid)
         const response=await CartService.deleteOrder(cid,pid)
         return {status:response.status}
@@ -94,4 +135,43 @@ export default class CartController{
         return null
       }
     }
+  
+  async checkout(req,res){
+    try{
+      if(!req.cookies.coderCookie){
+        return res.redirect('/login')
+      }
+      else{
+        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart;
+        // const result=await this.service.getCart(cid)
+        console.log(req.body)
+
+        // const cartList=await CartService.getCart(cid)
+        // const productList=cartList.payload.products.map(item=>{
+        //   return{pid:item.pid._id,
+        //   qty:item.quantity
+        //   }
+        // })
+        const updateInventory=productList.forEach(item=>{
+          const{pid,qty}=item
+          ProductService.updateInventory(pid,null,null,null,null,qty,null)
+        })
+
+        
+      console.log(productList)
+      }
+      /*
+      1.Traigo informacion del carrito, que info estoy mandando?
+      2.actualizo base de datos, restando
+      3.creo una orden en una bdd nueva
+      4.retorno el id de la orden
+      */
+    
+    return null
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
 }

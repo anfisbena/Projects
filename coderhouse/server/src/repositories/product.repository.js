@@ -8,6 +8,18 @@ export default class ProductRepository{
     return products
   }
 
+  async getProductById(id){
+    try{
+      const product=await this.dao.getProductById(id);
+      return product
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
+
+
   async addProduct(title,description,code,price,status,stock,category){
     try{
       console.log(title,description,code,price,status,stock,category,"REPOSITORY")

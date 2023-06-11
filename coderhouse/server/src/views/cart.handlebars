@@ -4,26 +4,31 @@
     <a href="/profile"><button>PROFILE</button></a>
   {{/if}}
   {{#if cart}}
-    {{#each cart}}
-    <table class="cartInfo">
+    <table>
       <tr>
         <th>Product</th>
         <th>Unit Price</th>
         <th>Qty</th>
         <th>Subtotal</th>
+        <th>Status</th>
         <th>Actions</th>
       </tr>
-      <tr>
-        <td>{{this.pid.title}}</td>
+      {{#each cart}}
+      <tr class="cartInfo">
+        <td class="pid" pid={{this.pid._id}}>{{this.pid.title}}</td>
         <td class="price" value={{this.pid.price}}>$ {{this.pid.price}}</td>
         <td class="quantity" value={{this.quantity}}>{{this.quantity}}</td>
         <td class="subtotal"></td>
-        <td>
-          <button class="deleteCartItem" pid={{this.pid._id}}>delete</button>
-        </td>
+        <td class="status">{{this.status}}</td>
+        <td><button class="deleteCartItem" pid={{this.pid._id}}>delete</button></td>
+      </tr>
+      {{/each}}
     </table>
-      <button class="updateCartItem" pid={{this.pid._id}}>Checkout!</button>
-    {{/each}}
+    <br>
+    <p class="total"></p>
+    <p><b>Total to pay</b></p>
+      <button class="checkoutButton" pid={{this.pid._id}}>Checkout!</button>
+    </tr>
   {{else}}
     <h2>Cart Empty</h2>
   {{/if}} 

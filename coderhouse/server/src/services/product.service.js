@@ -8,6 +8,17 @@ export default class ProductService{
     return result
   }
 
+  async getProductById(id){
+    try{
+      const result=await this.repository.getProductById(id)
+      return result
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
+
   async addProduct(title,description,code,price,status,stock,category){
     try{
       const result=await this.repository.addProduct(title,description,code,price,status,stock,category)

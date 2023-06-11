@@ -1,11 +1,11 @@
-//quede en 
+//quede en 27:06
 import express from 'express';
 import {PORT} from './config/config.js';
 import { engine } from 'express-handlebars';
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import morgan from 'morgan';
-import nodemailer from 'nodemailer';
+
 
 import { __dirname } from './utils.js';
 import initalizePassport from './auth/passport.js';
@@ -27,27 +27,3 @@ app.use(morgan('dev'))
 app.use(passport.initialize())
 initalizePassport; //Carga la estrategia de autenticacion
 Routes(app);
-const transport=nodemailer.createTransport({
-  service:'gmail',
-  port:587,
-  auth:{
-    user:'arcilacarmona@gmail.com',
-    pass:'byvghbkxkbxwsudk'
-  }
-})
-
-app.get('/send-email',(req,res)=>{
-  transport.sendMail({
-    from:'Coder Test <arcilacarmona@gmail.com>',
-    to:'<givemethecoin@gmail.com>',
-    subject:'Correo de prueba',
-    html:`
-    <div>
-      <h1>Prueba de correo</h1>
-      <p>Te cague güachin</p>
-    </div>
-    `,
-    attachments:[]
-  })
-  res.send('Correo enviado')
-})

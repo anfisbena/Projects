@@ -79,7 +79,6 @@ export default class UserController{
           pass:'byvghbkxkbxwsudk'
         }
       })
-
       transport.sendMail({
         from:'no-response <no-response@e-commerce.com>',
         to:`<${user.email}>`,
