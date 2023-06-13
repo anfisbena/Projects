@@ -6,7 +6,7 @@ const router = Router();
 router.get('/',CartController.getOrders);
 router.get('/:oid',CartController.getOrderById);
 router.post('/',CartController.addOrder);
-router.post('/checkout',CartController.checkout)
+router.post('/purchase',CartController.checkout)
 router.put('/:oid',CartController.updateOrder);
 router.delete('/:oid',CartController.deleteOrder);
 

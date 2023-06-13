@@ -26,10 +26,10 @@ export default class ProductController{
           user:user,
           currentPage:data.page,
           totalPages:data.totalPages,
-          hasPrevPage:data.prevLink,
-          hasNextPage:data.nextLink,
-          prevLink:data.prevPage?`http://localhost:8080/api/products?page=${data.prevPage}`:null,
-          nextLink:data.nextPage?`http://localhost:8080/api/products?page=${data.nextPage}`:null
+          hasPrevPage:data.hasPrevPage,
+          hasNextPage:data.hasNextPage,
+          prevLink:data.prevPage?`http://localhost:8080/products?page=${data.prevPage}`:null,
+          nextLink:data.nextPage?`http://localhost:8080/products?page=${data.nextPage}`:null
         });
     }
     catch(error){
@@ -87,6 +87,7 @@ export default class ProductController{
       const {title,description,code,price,status,stock,category}=req.body
       // const response=await this.service.updateProduct(id,title,description,code,price,status,stock,category)
       const response=await ProductService.updateProduct(id,title,description,code,price,status,stock,category)
+      
       return res.send({status:response.status,payload:response.payload})
     }
   

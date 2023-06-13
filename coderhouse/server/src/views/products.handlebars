@@ -29,10 +29,10 @@
       <div>
         <h2>Page {{currentPage}} of {{totalPages}}</h2>
         {{#if hasPrevPage}}
-          <a href={{hasPrevPage}}><button>Previous</button></a>
+          <a href={{prevLink}}><button>Previous</button></a>
         {{/if}}
         {{#if hasNextPage}}
-          <a href={{hasNextPage}}><button>Next</button></a>
+          <a href={{nextLink}}><button>Next</button></a>
         {{/if}}
       </div>
   {{else}}

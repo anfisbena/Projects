@@ -11,7 +11,6 @@ export default class Product {
   async getProductById(id){
     try{
       const result =await this.product.findById(id).lean()
-      console.log([result])
       return [result]
     }
     catch (error){
@@ -22,7 +21,6 @@ export default class Product {
   
   addProduct(title,description,code,price,status,stock,category){
     try{
-      console.log(title,description,code,price,status,stock,category)
       this.product.create(
         {
           title:title,
@@ -58,7 +56,7 @@ export default class Product {
           thumbnails:oldProduct[0].thumbnails
         }
         const caca=await this.product.findByIdAndUpdate(query,updatedProduct)
-        console.log(caca)
+
         return {status:200,result:'ok',payload:'producto actualizado'}  
       }
       catch (error){

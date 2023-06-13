@@ -125,7 +125,6 @@ export default class CartController{
       try{
         const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
         const pid=req.params.oid
-        console.log(req.body)
         // const response=await this.service.deleteOrder(cid,pid)
         const response=await CartService.deleteOrder(cid,pid)
         return {status:response.status}
@@ -144,25 +143,16 @@ export default class CartController{
       else{
         const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart;
         // const result=await this.service.getCart(cid)
-        console.log(req.body)
-
-        // const cartList=await CartService.getCart(cid)
-        // const productList=cartList.payload.products.map(item=>{
-        //   return{pid:item.pid._id,
-        //   qty:item.quantity
-        //   }
-        // })
-        const updateInventory=productList.forEach(item=>{
-          const{pid,qty}=item
-          ProductService.updateInventory(pid,null,null,null,null,qty,null)
-        })
-
-        
-      console.log(productList)
+        const UpdateProducts=req.body.forEach(
+          async element => {
+            const {pid,quantity}=element
+            console.log(pid,quantity)
+          }
+        )
       }
       /*
-      1.Traigo informacion del carrito, que info estoy mandando?
-      2.actualizo base de datos, restando
+      1.Traigo informacion del carrito, que info estoy mandando? DONE
+      2.actualizo base de datos, restando DONE//TEST PLEASE
       3.creo una orden en una bdd nueva
       4.retorno el id de la orden
       */

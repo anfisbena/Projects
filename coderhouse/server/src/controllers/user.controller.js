@@ -52,8 +52,6 @@ export default class UserController{
     }
     catch(err){console.log(err)}
   }
-  
-
   async getRegister(req, res){
     try{
       if(!req.cookies.coderCookie){
@@ -98,7 +96,6 @@ export default class UserController{
       return null
     }
   }
-
   getLogout (req, res){
     try{
       res.clearCookie(process.env.COOKIE)
@@ -106,7 +103,6 @@ export default class UserController{
     }
     catch(err){console.log(err)}
   }
-
   async getProfile(req,res){
     try{
       if(!req.cookies.coderCookie){
@@ -122,11 +118,9 @@ export default class UserController{
     }
     catch(err){console.log(err)}
   }
-
   async githubAuthenticate(){
     await passport.authenticate('githubAuth',{scope:['user:email']}),(req,res)=>{}
   }
-
   async githubSuccess(){
     passport.authenticate('githubAuth',{failureRedirect:'/login'}),async (req,res)=>{
       delete req.user.password
