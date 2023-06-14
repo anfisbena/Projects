@@ -73,4 +73,14 @@ export default class Product {
       return {status:400,result:'error',payload:'producto no encontrado'}
     } 
   }
+
+  async updateStock(id,quantity){
+    try{
+      await this.product.findByIdAndUpdate(id,{stock:quantity})
+      return {status:200,result:'ok',payload:'stock actualizado'}
+    }
+    catch(error){
+      return {status:400,result:'error',payload:'producto no encontrado'}
+    }
+  }
 }

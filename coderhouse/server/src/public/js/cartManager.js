@@ -35,10 +35,18 @@ checkoutButton.onclick=async(e)=>{
   e.preventDefault();
   await fetch(`/cart/purchase`,{
     method:"POST",
-    body:JSON.stringify(arrayOrders),
+    body:JSON.stringify({arrayOrders,total}),
     headers: {
       'Content-Type': 'application/json'
     }
   })
-  .then(x=>window.location.href='/cart')
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.status===200){
+      alert(`Compra realizada, tu comprobante es: ${data.payload.code}`)
+    }
+    else{
+      alert('intenta otra vez')
+    }
+  })
 }

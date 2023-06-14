@@ -51,4 +51,15 @@ export default class ProductService{
       return null
     }
   }
+  
+  async updateStock(id,quantity){
+    try{
+      const result=await this.repository.updateStock(id,quantity)
+      return result
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
 }

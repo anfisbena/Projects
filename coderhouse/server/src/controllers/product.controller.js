@@ -81,7 +81,6 @@ export default class ProductController{
       return null
     }
   }
-
   async updateProduct(req,res){
       const id = req.params.pid;
       const {title,description,code,price,status,stock,category}=req.body
@@ -89,8 +88,7 @@ export default class ProductController{
       const response=await ProductService.updateProduct(id,title,description,code,price,status,stock,category)
       
       return res.send({status:response.status,payload:response.payload})
-    }
-  
+  }
   async deleteProduct(req,res){
       try{
         // const response=await this.service.deleteProduct(req.params.pid)
@@ -101,5 +99,14 @@ export default class ProductController{
         console.log(error)
         return null
       }
+  }
+  async updateStock(req,res){
+    try{
+
     }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
 }

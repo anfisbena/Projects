@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../config/config.js";
-import {CartService,ProductService} from "../services/index.js"
+import {CartService,ProductService,OrderService} from "../services/index.js"
 
 export default class CartController{
   constructor(service){
@@ -141,23 +141,25 @@ export default class CartController{
         return res.redirect('/login')
       }
       else{
-        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart;
-        // const result=await this.service.getCart(cid)
-        const UpdateProducts=req.body.forEach(
-          async element => {
-            const {pid,quantity}=element
-            console.log(pid,quantity)
+        const productList=req.body.arrayOrders
+        const total=req.body.total
+        const email=jwt.verify(req.cookies.coderCookie,JWT_SECRET).email;
+        const orderList=[]
+
+        for (const element of productList) {
+          const { pid, quantity, stock } = element;
+          if (stock === 'In Stock') {
+            const inventory = await ProductService.getProductById(pid);
+            const newStock = inventory[0].stock - quantity;
+            const updateStock = await ProductService.updateStock(pid, newStock);
+            if (updateStock.status === 200) {
+              orderList.push({ pid, quantity });
+            }
           }
-        )
+        }
+        const response = await OrderService.addOrder(total, email, orderList);
+        return res.send({ status: response.status, payload: response.payload });
       }
-      /*
-      1.Traigo informacion del carrito, que info estoy mandando? DONE
-      2.actualizo base de datos, restando DONE//TEST PLEASE
-      3.creo una orden en una bdd nueva
-      4.retorno el id de la orden
-      */
-    
-    return null
     }
     catch(error){
       console.log(error)

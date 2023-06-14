@@ -1,7 +1,7 @@
 import {Schema,model} from "mongoose";
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-const TicketSchema= new Schema({
+const OrderSchema= new Schema({
   code: { type: String, unique: true, required: true },
   purchase_datetime: { type: Date, default: Date.now, required: true },
   amount: { type: Number, required: true },
@@ -20,7 +20,7 @@ const TicketSchema= new Schema({
   ]
 })
 
-TicketSchema.plugin(mongoosePaginate)
-const Tickets = model("order", CartSchema);
+OrderSchema.plugin(mongoosePaginate)
+const Orders = model("order", OrderSchema);
 
-export default Tickets;
+export default Orders;

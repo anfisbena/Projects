@@ -53,4 +53,15 @@ export default class ProductRepository{
       return null
     }
   }
+
+  async updateStock(id,quantity){
+    try{
+      const product=await this.dao.updateStock(id,quantity);
+      return product
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
 }
