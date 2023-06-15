@@ -44,6 +44,7 @@ checkoutButton.onclick=async(e)=>{
   .then(data=>{
     if(data.status===200){
       alert(`Compra realizada, tu comprobante es: ${data.payload.code}`)
+      window.location.href='/cart'
     }
     else{
       alert('intenta otra vez')

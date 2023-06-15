@@ -144,6 +144,7 @@ export default class CartController{
         const productList=req.body.arrayOrders
         const total=req.body.total
         const email=jwt.verify(req.cookies.coderCookie,JWT_SECRET).email;
+        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart;
         const orderList=[]
 
         for (const element of productList) {
@@ -154,6 +155,7 @@ export default class CartController{
             const updateStock = await ProductService.updateStock(pid, newStock);
             if (updateStock.status === 200) {
               orderList.push({ pid, quantity });
+              await CartService.deleteOrder(cid, pid);
             }
           }
         }
