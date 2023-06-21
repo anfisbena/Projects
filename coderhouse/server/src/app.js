@@ -1,10 +1,11 @@
-//quede en 27:06
+//quede en 1:47:00
 import express from 'express';
 import {PORT} from './config/config.js';
 import { engine } from 'express-handlebars';
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import morgan from 'morgan';
+import socket from './socket.js'
 
 
 import { __dirname } from './utils.js';
@@ -13,8 +14,7 @@ import Routes from './routes/index.js';
 
 
 const app=express();
-
-app.listen(PORT,()=>{console.log('escuchando en '+PORT)})
+const httpServer=app.listen(PORT,()=>{console.log('escuchando en '+PORT)})
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -27,3 +27,4 @@ app.use(morgan('dev'))
 app.use(passport.initialize())
 initalizePassport; //Carga la estrategia de autenticacion
 Routes(app);
+socket.connect(httpServer);

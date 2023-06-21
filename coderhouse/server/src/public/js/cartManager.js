@@ -43,7 +43,12 @@ checkoutButton.onclick=async(e)=>{
   .then(res=>res.json())
   .then(data=>{
     if(data.status===200){
-      alert(`Compra realizada, tu comprobante es: ${data.payload.code}`)
+      Swal.fire({
+        icon: 'success',
+        title: 'Pago realizado',
+        text: `Compra realizada, tu comprobante es: ${data.payload.code}`
+      })
+      alert()
       window.location.href='/cart'
     }
     else{
