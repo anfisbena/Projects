@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../config/config.js";
 import {ProductService} from "../services/index.js"
+import { logger } from "../utils/logger.js";
 
 export default class ProductController{
   constructor(service){
@@ -9,6 +10,7 @@ export default class ProductController{
   
   async getProducts(req,res){
     try{
+      logger.http('TESTEO') //logger
       const query=req.query.query||{};
       const options=
         {
@@ -103,6 +105,25 @@ export default class ProductController{
   async updateStock(req,res){
     try{
 
+    }
+    catch(error){
+      console.log(error)
+      return null
+    }
+  }
+  async getProductPage(req,res){
+    try{
+      const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
+      if(user.role!=='user'){
+        return res.render('401')
+      }
+      else{
+        console.log(user)
+        return res.render('addProduct', {
+          title: 'addProduct',
+          user:user
+        });
+      }
     }
     catch(error){
       console.log(error)

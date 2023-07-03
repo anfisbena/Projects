@@ -22,4 +22,24 @@ export default class UserRepository{
       return null
     }
   }
+  async validateUserEmail(email){
+    try{
+      const result=await this.dao.validateUserEmail(email)
+      return result
+    }
+    catch(err){
+      console.log(err)
+      return null
+    }
+  }
+  async updateUserPassword(email,password){
+    try{
+      const result=await this.dao.updateUserPassword(email,password)
+      return result
+    }
+    catch(err){
+      console.log(err)
+      return null
+    }
+  }
 };  

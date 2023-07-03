@@ -5,6 +5,7 @@ import passport from 'passport';
 import {UserService} from "../services/index.js"
 import nodemailer from 'nodemailer';
 
+
 export default class UserController{
   constructor(service){
     this.service=service
@@ -134,5 +135,105 @@ export default class UserController{
       .cookie(COOKIE,jsonWebToken,{httpOnly:true,maxAge:86400000})
       .redirect('/')
     }
+  }
+
+  async getRecover(req,res){
+    if(req.cookies.coderCookie){
+      return res.redirect('/')
+    }
+    else{
+      return res.render('recover',{
+        title:'Recover password',
+        status:'recover'
+      })
+    }
+  }
+  async setRecover(req,res){
+    try{
+      const email=req.body.email
+      const user=await UserService.validateUserEmail(email)
+      const userInfo={
+        email:user.payload.email,
+        password:user.payload.password,
+      }
+      const userToken=jwt.sign(
+        userInfo,
+        process.env.JWT_SECRET,
+        {expiresIn:'1h'}
+      )
+
+      if(user.status===200){
+        const transport=nodemailer.createTransport({
+          service:'gmail',
+          port:587,
+          auth:{
+            user:'arcilacarmona@gmail.com',
+            pass:'byvghbkxkbxwsudk'
+          }
+        })
+        transport.sendMail({
+          from:'no-response <no-response@e-commerce.com>',
+          to:`<${email}>`,
+          subject:'Recuperacion de contraseña',
+          html:`
+          <div>
+            <h1>¿Se te olvido la contraseña?</h1>
+            <p>Has pedido recuperar la contraseña, para continuar da click <a href='http://localhost:8080/recover/${userToken}'>AQUI!</a></p>
+            <p>Si no fuiste tu, ignora este mensaje</p>
+          </div>
+          `,
+          attachments:[]
+        })
+        return res.send({user})
+      }
+      else{
+        return res.send({user})
+      }
+    }
+    catch(err){console.log(err)}
+  }
+  async getNewPassword(req,res){
+    try{
+      const token=req.params.userToken
+      const userInfo=jwt.verify(token,JWT_SECRET)
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+    if (userInfo.exp < currentTimestamp) {
+      return res.render('newPassword', {
+        title: 'New password',
+        validKey:false
+      });
+    }
+    else{
+      return res.render('newPassword', {
+        title: 'New password',
+        validKey:true
+      });
+    }
+  }
+    catch(err){
+      return res.render('newPassword', {
+        title: 'New password',
+        validKey:false
+      });
+    }
+  }
+  async setNewPassword(req,res){
+    try{
+      const newPassword=req.body.password
+      const token=req.params.userToken
+      const tokenInfo=jwt.verify(token,JWT_SECRET)
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      if (tokenInfo.exp < currentTimestamp) {
+        return res.render('newPassword', {
+          title: 'New password',
+          validKey:false
+        });
+      }
+      else{
+        const response=await UserService.updateUserPassword(tokenInfo.email,newPassword)
+        return res.send({status:response.status,message:response.message})
+      }
+    }
+    catch(err){console.log(err)}
   }
 }

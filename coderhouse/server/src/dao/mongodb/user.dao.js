@@ -10,7 +10,7 @@ export default class User {
 
   async getUser(email){
     try{
-      return await this.user.findOne({email:email});
+      return await this.user.findOne({email:email}).lean();
     }
     catch(error){
       console.log(error)
@@ -43,6 +43,37 @@ export default class User {
     catch(error){
       console.log(error)
       return {status:500,result:'error',payload:'internal error'}
+    }
+  }
+
+  async validateUserEmail(email){
+    try{
+      const userExist=await this.user.findOne({email:email}).lean()
+      if(userExist){
+        return {status:200,result:'ok',payload:userExist}
+      }
+      else{
+        return {status:400,result:'error',payload:'user does not exist'}
+      }
+    }
+    catch(error){
+      console.log(error)
+      return {status:500,result:'error',payload:'internal error'}
+    }
+  }
+
+  async updateUserPassword(email,password){
+    try{
+      const userExist=await this.user.findOne({email:email}).lean()
+      if(userExist){
+        const newPassword=hash(password)
+        await this.user.findByIdAndUpdate(userExist._id,{password:newPassword})
+        return {status:200,result:'ok',message:'Contraseña Cambiada Exitosamente'}
+      }
+    }
+    catch(error){
+      console.log(error)
+      return {status:500,result:'error',message:'internal error'}
     }
   }
 }

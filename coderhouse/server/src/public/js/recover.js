@@ -2,31 +2,31 @@ const loginForm= document.getElementById('recoverForm');
 
 loginForm.addEventListener('submit',async(e)=>{
   e.preventDefault();
-  const email=e.target.elements.email.value
-  const password=e.target.elements.password.value
-  const validatePassword=e.target.elements.validatePassword.value
-  if(password!==validatePassword){
-    alert("Contraseña no coincide")
-    return
-  }
-  const obj={email,password};
-
-  await fetch('/recover',{
-    method:"POST",
-    body: JSON.stringify(obj),
+  const email=e.target.email.value;
+  await fetch(`/recover`,{
+    method:'POST',
+    body:JSON.stringify({email}),
     headers: {
       'Content-Type': 'application/json'
     },
   })
   .then(res=>res.json())
   .then(data=>{
-    if(data.status===200){
-      alert('Contraseña actualizada')
-      window.location.href='/login'
+    if(data.user.status===200){
+      Swal.fire({
+        icon: 'success',
+        title: 'Correo enviado ',
+        text: `porfavor revisa tu correo para mas instrucciones`
+      })
+    .then(()=>window.location.href='/login')      
     }
     else{
-      alert('Error al actualizar contraseña')
+      Swal.fire({
+        icon: 'error',
+        title: 'Correo no existe',
+        text: `intenta escribiendo tu correo nuevamente`
+      })
     }
   })
-
+  .catch(err=>console.log(err))
 })

@@ -5,6 +5,7 @@ import {productRights} from "../middlewares/authentication.js";
 
 const router = Router();
 
+router.get("/addproduct",ProductController.getProductPage)
 router.get("/",ProductController.getProducts);
 router.get('/:pid',ProductController.getProductById);
 router.post('/',productRights,ProductController.addProduct);
