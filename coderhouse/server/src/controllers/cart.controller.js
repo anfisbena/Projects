@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "../config/config.js";
+import {config} from "../config/config.js";
 import {CartService,ProductService,OrderService} from "../services/index.js"
+
+const {jwtconfig}=config
 
 export default class CartController{
   constructor(service){
@@ -13,7 +15,7 @@ export default class CartController{
         return res.redirect('/login')
       }
       else{
-        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
+        const cid=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).cart
         // const result=await this.service.getCart(cid)
         const list=await CartService.getCart(cid)
         const result=await Promise.all(
@@ -44,7 +46,7 @@ export default class CartController{
         return res.redirect('/login')
       }
       else{
-        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
+        const cid=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).cart
         // const result=await this.service.getCart(cid)
         const list=await CartService.getCart(cid)
         const result=await Promise.all(
@@ -80,7 +82,7 @@ export default class CartController{
         };
         // const data=await this.service.getOrders(query,options);
         const data=await CartService.getOrders(query,options);
-        const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
+        const user=jwt.verify(req.cookies.coderCookie,jwtconfig.secret)
         return res.render('cart', {
           title: 'cart',
           products: data.docs,
@@ -101,7 +103,7 @@ export default class CartController{
   }
   async addOrder(req,res){
     try{
-      const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
+      const cid=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).cart
       const {pid,qty}=req.body
       // // const response=await this.service.addProduct(cid,pid,qty)
       const response=await CartService.addOrder(cid,pid,qty)
@@ -123,7 +125,7 @@ export default class CartController{
   
   async deleteOrder(req,res){
       try{
-        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart
+        const cid=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).cart
         const pid=req.params.oid
         // const response=await this.service.deleteOrder(cid,pid)
         const response=await CartService.deleteOrder(cid,pid)
@@ -143,8 +145,8 @@ export default class CartController{
       else{
         const productList=req.body.arrayOrders
         const total=req.body.total
-        const email=jwt.verify(req.cookies.coderCookie,JWT_SECRET).email;
-        const cid=jwt.verify(req.cookies.coderCookie,JWT_SECRET).cart;
+        const email=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).email;
+        const cid=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).cart;
         const orderList=[]
 
         for (const element of productList) {

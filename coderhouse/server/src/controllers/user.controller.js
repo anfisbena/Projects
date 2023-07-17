@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
-import {COOKIE,JWT_SECRET} from "../config/config.js";
+import {config} from "../config/config.js";
 import UserDTO from "../dao/dto/user.dto.js";
 import passport from 'passport';
 import {UserService} from "../services/index.js"
 import nodemailer from 'nodemailer';
 
+const {jwtconfig}=config
 
 export default class UserController{
   constructor(service){
@@ -42,12 +43,12 @@ export default class UserController{
         }
         const jsonWebToken=jwt.sign(
           userData,
-          process.env.JWT_SECRET,
+          jwtconfig.secret,
           {expiresIn:'1d'}
         )
 
         return res
-        .cookie(COOKIE,jsonWebToken,{httpOnly:true,maxAge:86400000})
+        .cookie(jwtconfig.cookie,jsonWebToken,{httpOnly:true,maxAge:86400000})
         .send({status:200,message:'User logged in'})
       }
     }
@@ -99,7 +100,7 @@ export default class UserController{
   }
   getLogout (req, res){
     try{
-      res.clearCookie(process.env.COOKIE)
+      res.clearCookie(jwtconfig.cookie)
       return res.redirect('/login')
     }
     catch(err){console.log(err)}
@@ -110,7 +111,7 @@ export default class UserController{
         return res.redirect('/login')
       }
       else{
-        const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
+        const user=jwt.verify(req.cookies.coderCookie,jwtconfig.secret)
         return res.render('profile',{
           title:'Profile',
           user:user
@@ -128,11 +129,11 @@ export default class UserController{
       req.session.user=req.user;
       const jsonWebToken=jwt.sign(
         req.session.user,
-        process.env.JWT_SECRET,
+        jwtconfig.secret,
         {expiresIn:'1d'}
       )
       return res
-      .cookie(COOKIE,jsonWebToken,{httpOnly:true,maxAge:86400000})
+      .cookie(jwtconfig.cookie,jsonWebToken,{httpOnly:true,maxAge:86400000})
       .redirect('/')
     }
   }
@@ -158,7 +159,7 @@ export default class UserController{
       }
       const userToken=jwt.sign(
         userInfo,
-        process.env.JWT_SECRET,
+        jwtconfig.secret,
         {expiresIn:'1h'}
       )
 
@@ -195,7 +196,7 @@ export default class UserController{
   async getNewPassword(req,res){
     try{
       const token=req.params.userToken
-      const userInfo=jwt.verify(token,JWT_SECRET)
+      const userInfo=jwt.verify(token,jwtconfig.secret)
       const currentTimestamp = Math.floor(Date.now() / 1000);
     if (userInfo.exp < currentTimestamp) {
       return res.render('newPassword', {
@@ -221,7 +222,7 @@ export default class UserController{
     try{
       const newPassword=req.body.password
       const token=req.params.userToken
-      const tokenInfo=jwt.verify(token,JWT_SECRET)
+      const tokenInfo=jwt.verify(token,jwtconfig.secret)
       const currentTimestamp = Math.floor(Date.now() / 1000);
       if (tokenInfo.exp < currentTimestamp) {
         return res.render('newPassword', {

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubeUsers
+spec:
+  selector:
+    app: kubeUsers
+  ports:
+    -  port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeUsers
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: kubeUsers
+  template:
+    metadata:
+      labels:
+        app: kubeUsers
+    spec:
+      containers:
+      - name: kubeUsers
+        image: coderhouse:latest
+        ports:
+          - containerPort: 8080
+        env:
+          - name: mongoDB
+            value: mongodb+srv://coderhouse:1234@cluster0.bsrdbik.mongodb.net/ecommerce?retryWrites=true&w=majority
+        imagePullPolicy: Always

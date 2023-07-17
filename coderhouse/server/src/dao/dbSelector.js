@@ -1,8 +1,10 @@
-import {PERSISTANCE} from '../config/config.js';
+import {config} from '../config/config.js';
+
+const {dbPicker}=config
 
 export let dao;
 
-switch (PERSISTANCE) {
+switch (dbPicker) {
   case "MONGO":
     const mongo=await import  ('./mongodb/index.js')
     dao=mongo

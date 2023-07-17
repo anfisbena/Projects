@@ -1,3 +1,4 @@
+import multer from 'multer';
 import {dirname} from 'path';
 import { fileURLToPath } from 'url';
 import { hashSync, genSaltSync, compareSync } from 'bcrypt';
@@ -37,4 +38,16 @@ export const generateUser=()=>{
     }
 }
 
-export default {__dirname,hash,validatePassword,generateProduct,generateUser};
+// Configuración de Multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, `${__dirname}/public/images`);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+export const uploader = multer({ storage });
+
+export default {__dirname,hash,validatePassword,generateProduct,generateUser,uploader};

@@ -1,17 +1,19 @@
 import passport from "passport";
 import github from "passport-github2";
 import jwt from 'passport-jwt'; //afterclass 11/05
-import {JWT_SECRET,GITHUB_CID,GITHUB_SECRET,GITHUB_URL} from '../config/config.js';
+import {config} from '../config/config.js';
 import {cookieExtractor} from './passportTools.js'
 import User from "../dao/mongodb/models/user.model.js";
 
 const jwtStrategy=jwt.Strategy;
 const GitHubStrategy=github.Strategy;
 
+const{jwtconfig,githubConfig}=config
+
 export const initializePassport=()=>{
   const jwtOptions={
     jwtFromRequest:jwt.ExtractJwt.fromExtractors([cookieExtractor]),
-    secretOrKey:JWT_SECRET,
+    secretOrKey:jwtconfig.secret,
   }
   const jwtPayload=async (jwtPayload,done)=>{
     try{
@@ -23,9 +25,9 @@ export const initializePassport=()=>{
   }
 
   passport.use('githubAuth',new GitHubStrategy({
-    clientID:GITHUB_CID,
-    clientSecret:GITHUB_SECRET,
-    callbackURL:GITHUB_URL,
+    clientID:githubConfig.cid,
+    clientSecret:githubConfig.secret,
+    callbackURL:githubConfig.url,
     },
     async(accessToken,refreshToken,profile,done)=>{
       try{

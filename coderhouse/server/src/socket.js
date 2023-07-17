@@ -1,4 +1,4 @@
-//quede en min 57:00 sockets
+//quede en min 1:09 Orquestacion de contenedores
 import {Server} from 'socket.io'
 
 const socket={}  

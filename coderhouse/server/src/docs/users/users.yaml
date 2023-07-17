@@ -1,0 +1,109 @@
+info:
+  title: Coderhouse API
+  description: This is the API for the Coderhouse application.
+paths:
+  /users:
+    get:
+      operationId: getUsers
+      description: Get all users.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+    post:
+      operationId: createUser
+      description: Create a new user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/User'
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/User'
+  /users/{userId}:
+    get:
+      operationId: getUserById
+      description: Get a user by ID.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/User'
+    delete:
+      operationId: deleteUserById
+      description: Delete a user by ID.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Success
+
+  definitions:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: 123456
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: objectId
+          description: Id del usuario autogenerado
+        firstname:
+          type: string
+          description: Nombre del usuario
+        lastname:
+          type: string
+          description: Apellido del usuario
+        email:
+          type: string
+          description: Email del usuario
+        password:
+          type: string
+          description: Contraseña del usuario
+        role:
+          type: string
+          description: Rol del usuario
+      
+      example:
+        _id: 048d8wj3420J69
+        firstname: Juan
+        lastname: Perez
+        email: juanperez@gmail.com
+        password: 123456
+        role: admin

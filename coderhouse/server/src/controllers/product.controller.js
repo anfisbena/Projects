@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "../config/config.js";
+import {config} from "../config/config.js";
 import {ProductService} from "../services/index.js"
 import { logger } from "../utils/logger.js";
+
+const {jwtconfig}=config
 
 export default class ProductController{
   constructor(service){
@@ -21,7 +23,7 @@ export default class ProductController{
         };
         // const data=await this.service.getProducts(query,options);
         const data=await ProductService.getProducts(query,options);
-        const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
+        const user=jwt.verify(req.cookies.coderCookie,jwtconfig.secret)
         return res.render('products', {
           title: 'products',
           products: data.docs,
@@ -52,7 +54,7 @@ export default class ProductController{
         };
         // const data=await this.service.getProducts(query,options);
         const data=await ProductService.getProducts(query,options);
-        const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
+        const user=jwt.verify(req.cookies.coderCookie,jwtconfig.secret)
         return res.render('products', {
           title: 'products',
           products: data.docs,
@@ -74,6 +76,7 @@ export default class ProductController{
   async addProduct(req,res){
     try{
       const {title,description,code,price,status,stock,category}=req.body
+      const thumbnails=req.files.map((file)=>file.filename)
       // const response=await this.service.addProduct(title,description,code,price,status,stock,category)
       const response=await ProductService.addProduct(title,description,code,price,status,stock,category)
       return res.send({status:response.status,payload:response.payload})
@@ -113,7 +116,7 @@ export default class ProductController{
   }
   async getProductPage(req,res){
     try{
-      const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
+      const user=jwt.verify(req.cookies.coderCookie,jwtconfig.secret)
       if(user.role!=='user'){
         return res.render('401')
       }

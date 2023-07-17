@@ -1,13 +1,14 @@
 import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "../config/config.js";
+import {config} from "../config/config.js";
 
+const {jwtconfig}=config
 export const cartRigths= async(req, res, next) => {
   try{
     if(!req.cookies.coderCookie){
       return res.redirect('/login')
     }
     else{
-      const role=jwt.verify(req.cookies.coderCookie,JWT_SECRET).role
+      const role=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).role
       if(role==='user'){
         next()
       }
@@ -31,7 +32,7 @@ export const productRights= async(req, res, next) => {
       return res.redirect('/login')
     }
     else{
-      const role=jwt.verify(req.cookies.coderCookie,JWT_SECRET).role
+      const role=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).role
       if(role==='admin'){
         next()
       }
@@ -55,7 +56,7 @@ export const chatRights= async(req, res, next) => {
       return res.redirect('/login')
     }
     else{
-      const role=jwt.verify(req.cookies.coderCookie,JWT_SECRET).role
+      const role=jwt.verify(req.cookies.coderCookie,jwtconfig.secret).role
       if(role==='user'){
         next()
       }

@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "../config/config.js";
+import {config} from "../config/config.js";
 import {generateProduct,generateUser} from '../utils.js'
 
+const {jwtconfig}=config
 export default class MockingController{
   constructor(){}
 
@@ -9,7 +10,7 @@ export default class MockingController{
     try{
       const products=[];
       for(let i=0;i<50;i++){products.push(generateProduct())}
-        const user=jwt.verify(req.cookies.coderCookie,JWT_SECRET)
+        const user=jwt.verify(req.cookies.coderCookie,jwtconfig.secret)
         return res.render('products', {
           title: 'products',
           products: products,
