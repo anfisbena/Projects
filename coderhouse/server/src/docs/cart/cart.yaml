@@ -1,0 +1,136 @@
+paths:
+  /cart:
+    get:
+      summary: Obtiene todas las órdenes del carrito
+      tags:
+        - Cart
+      responses:
+        200:
+          description: OK
+      parameters:
+        - name: uid
+          in: query
+          description: ID del usuario
+          required: false
+          $type: string
+          
+    post:
+      summary: Agrega una nueva orden al carrito
+      tags:
+        - Cart
+      parameters:
+        - name: order
+          in: body
+          description: Detalles de la orden a agregar
+          required: true
+          schema:
+            $ref: "#/definitions/CartOrder"
+      responses:
+        200:
+          description: OK
+
+  /cart/{oid}:
+    get:
+      summary: Obtiene una orden del carrito por ID
+      tags:
+        - Cart
+      parameters:
+        - name: oid
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+    put:
+      summary: Actualiza una orden del carrito existente
+      tags:
+        - Cart
+      parameters:
+        - name: oid
+          in: path
+          required: true
+          type: string
+        - name: order
+          in: body
+          description: Detalles actualizados de la orden
+          required: true
+          schema:
+            $ref: "#/definitions/CartOrder"
+      responses:
+        200:
+          description: OK
+    delete:
+      summary: Elimina una orden del carrito existente
+      tags:
+        - Cart
+      parameters:
+        - name: oid
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+
+  /cart/purchase:
+    post:
+      summary: Realiza el proceso de pago de una orden del carrito
+      tags:
+        - Cart
+      parameters:
+        - name: paymentDetails
+          in: body
+          description: Detalles de pago de la orden
+          required: true
+          schema:
+            $ref: "#/definitions/CartPaymentDetails"
+      responses:
+        200:
+          description: OK
+
+definitions:
+  CartOrder:
+    type: object
+    properties:
+      uid:
+        type: string
+        description: ID del usuario
+      products:
+        type: array
+        items:
+          $ref: "#/definitions/CartProduct"
+    example:
+      uid: 048d8wj3420J69
+      products:
+        - pid: abc123
+          quantity: 2
+        - pid: xyz789
+          quantity: 1
+
+  CartProduct:
+    type: object
+    properties:
+      pid:
+        type: string
+        description: ID del producto
+      quantity:
+        type: number
+        description: Cantidad del producto en la orden
+
+  CartPaymentDetails:
+    type: object
+    properties:
+      oid:
+        type: string
+        description: ID de la orden a pagar
+      paymentMethod:
+        type: string
+        description: Método de pago utilizado
+      totalAmount:
+        type: number
+        description: Monto total de la orden a pagar
+    example:
+      oid: 123456
+      paymentMethod: creditCard
+      totalAmount: 100.0

@@ -1,109 +1,161 @@
-info:
-  title: Coderhouse API
-  description: This is the API for the Coderhouse application.
 paths:
-  /users:
+  /login:
     get:
-      operationId: getUsers
-      description: Get all users.
+      summary: Obtiene la página de inicio de sesión
+      tags:
+        - User
       responses:
         200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/definitions/User'
+          description: OK
     post:
-      operationId: createUser
-      description: Create a new user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/definitions/User'
-      responses:
-        201:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/User'
-  /users/{userId}:
-    get:
-      operationId: getUserById
-      description: Get a user by ID.
+      summary: Inicia sesión de usuario
+      tags:
+        - User
       parameters:
-        - in: path
-          name: userId
+        - name: user
+          in: body
+          description: Credenciales de usuario
           required: true
           schema:
-            type: integer
+            $ref: "#/definitions/User"
       responses:
         200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/User'
-    delete:
-      operationId: deleteUserById
-      description: Delete a user by ID.
+          description: OK
+
+  /logout:
+    get:
+      summary: Cierra la sesión de usuario
+      tags:
+        - User
+      responses:
+        200:
+          description: OK
+
+  /profile:
+    get:
+      summary: Obtiene el perfil del usuario
+      tags:
+        - User
+      responses:
+        200:
+          description: OK
+
+  /register:
+    get:
+      summary: Obtiene la página de registro de usuario
+      tags:
+        - User
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Registra un nuevo usuario
+      tags:
+        - User
       parameters:
-        - in: path
-          name: userId
+        - name: user
+          in: body
+          description: Datos de usuario a registrar
           required: true
           schema:
-            type: integer
+            $ref: "#/definitions/User"
       responses:
-        204:
-          description: Success
+        200:
+          description: OK
 
-  definitions:
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 1
-        name:
+  /recover:
+    get:
+      summary: Obtiene la página de recuperación de contraseña
+      tags:
+        - User
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Envía solicitud de recuperación de contraseña
+      tags:
+        - User
+      parameters:
+        - name: email
+          in: formData
           type: string
-          example: John Doe
-        email:
-          type: string
-          example: johndoe@example.com
-        password:
-          type: string
-          example: 123456
-  schemas:
-    User:
-      type: object
-      properties:
-        _id:
-          type: objectId
-          description: Id del usuario autogenerado
-        firstname:
-          type: string
-          description: Nombre del usuario
-        lastname:
-          type: string
-          description: Apellido del usuario
-        email:
-          type: string
+          required: true
           description: Email del usuario
-        password:
+      responses:
+        200:
+          description: OK
+
+  /recover/{userToken}:
+    get:
+      summary: Obtiene la página para establecer una nueva contraseña
+      tags:
+        - User
+      parameters:
+        - name: userToken
+          in: path
+          required: true
           type: string
-          description: Contraseña del usuario
-        role:
+      responses:
+        200:
+          description: OK
+    put:
+      summary: Establece una nueva contraseña
+      tags:
+        - User
+      parameters:
+        - name: userToken
+          in: path
+          required: true
           type: string
-          description: Rol del usuario
-      
-      example:
-        _id: 048d8wj3420J69
-        firstname: Juan
-        lastname: Perez
-        email: juanperez@gmail.com
-        password: 123456
-        role: admin
+        - name: password
+          in: formData
+          type: string
+          required: true
+          description: Nueva contraseña del usuario
+      responses:
+        200:
+          description: OK
+
+  /auth/github:
+    get:
+      summary: Inicia sesión con GitHub
+      tags:
+        - User
+      responses:
+        200:
+          description: OK
+
+  /auth/github/success:
+    get:
+      summary: Página de inicio de sesión de GitHub exitosa
+      tags:
+        - User
+      responses:
+        200:
+          description: OK
+
+definitions:
+  User:
+    type: object
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+        enum:
+          - admin
+          - user
+      cart:
+        type: string
+    example:
+      first_name: Juan
+      last_name: Perez
+      email: juanperez@gmail.com
+      password: 123456
+      role: user

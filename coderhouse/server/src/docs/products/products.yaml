@@ -1,0 +1,108 @@
+paths:
+  /products/addproduct:
+    get:
+      summary: Obtiene la página de agregar producto
+      tags:
+        - Product
+      responses:
+        200:
+          description: OK
+
+  /products:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+        - Product
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Agrega un nuevo producto
+      tags:
+        - Product
+      parameters:
+        - name: product
+          in: body
+          description: Producto a agregar
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: OK
+
+  /products/{pid}:
+    get:
+      summary: Obtiene un producto por ID
+      tags:
+        - Product
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+    put:
+      summary: Actualiza un producto existente
+      tags:
+        - Product
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          type: string
+        - name: product
+          in: body
+          description: Producto actualizado
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: OK
+    delete:
+      summary: Elimina un producto existente
+      tags:
+        - Product
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+definitions:
+  Product:
+    type: object
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      code:
+        type: string
+      price:
+        type: number
+      status:
+        type: boolean
+      stock:
+        type: number
+      category:
+        type: string
+        enum:
+          - Novartis
+          - Viatris
+          - Merck
+          - Pfizer
+          - AbbVie
+          - Moderna
+          - Roche
+          - GMK
+          - J&J
+      thumbnails:
+        type: array
+        items:
+          type: string

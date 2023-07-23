@@ -25,7 +25,7 @@ const swaggerOptions={
       description:'API information',
     }
   },
-  apis:[`${__dirname}/docs/**/*.yml`]
+  apis:[`${__dirname}/docs/**/*.yaml`]
 }
 const swaggerDocs=swaggerJSDoc(swaggerOptions);
 app.use('/apidocs',swaggerUiExpress.serve,swaggerUiExpress.setup(swaggerDocs));

@@ -33,6 +33,7 @@
     "winston": "^3.9.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.0.2"
+    "@faker-js/faker": "^8.0.2",
+    "swagger-autogen": "^2.23.5"
   }
 }

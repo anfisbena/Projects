@@ -10,7 +10,7 @@ export function Routers(app){
   app.use('/',userRouter);
   app.use('/products',productRouter);
   app.use('/cart',cartRouter);
-  app.use('/chat',chatRouter)
+  app.use('/chat',chatRouter);
   app.use('/mockingproducts',mockingRouter)
 }
 
