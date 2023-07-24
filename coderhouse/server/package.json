@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/test/*.test.js --timeout 10000"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +34,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
     "swagger-autogen": "^2.23.5"
   }
 }
